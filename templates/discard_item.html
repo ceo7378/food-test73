@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>廃棄品リスト</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>廃棄品リスト</h1>
+    <nav>
+        <a href="/">ホーム</a>
+        <a href="/discard_item">廃棄品登録</a>
+    </nav>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>商品ID</th>
+                <th>廃棄日</th>
+                <th>廃棄理由</th>
+                <th>廃棄数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for discard in discards %}
+            <tr>
+                <td>{{ discard.id }}</td>
+                <td>{{ discard.item_id }}</td>
+                <td>{{ discard.discard_date }}</td>
+                <td>{{ discard.reason }}</td>
+                <td>{{ discard.discarded_quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>商品追加フォーム</title>
+</head>
+<body>
+    <h1>商品を追加</h1>
+    <form action="/add_item" method="POST">
+        <label for="name">商品名:</label>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="quantity">数量:</label>
+        <input type="number" id="quantity" name="quantity" required><br>
+
+        <label for="price">価格:</label>
+        <input type="number" id="price" name="price" required><br>
+
+        <label for="expiration_date">賞味期限:</label>
+        <input type="date" id="expiration_date" name="expiration_date"><br>
+
+        <button type="submit">追加</button>
+    </form>
+</body>
+</html>
