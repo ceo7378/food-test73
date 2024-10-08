@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}廃棄品登録{% endblock %}
+
+{% block content %}
+    <h2>廃棄品登録</h2>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <form action="/register_disposal" method="POST">
+        <label for="name">商品名:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="quantity">数量:</label>
+        <input type="number" id="quantity" name="quantity" required><br>
+
+        <label for="reason">廃棄理由:</label>
+        <textarea id="reason" name="reason" required></textarea><br>
+
+        <button type="submit">廃棄品を登録</button>
+    </form>
+{% endblock %}
