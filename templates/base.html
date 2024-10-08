@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}在庫管理システム{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- 共通ヘッダー -->
+    <header>
+        <h1>在庫管理システム</h1>
+        <nav>
+            <a href="/">ホーム</a> |
+            <a href="/add_item">商品を追加</a> |
+            <a href="/items">購入品一覧</a> |
+            <a href="/stocks">在庫一覧</a> |
+            <a href="/discards">廃棄品一覧</a> |
+            <a href="/total_graph">合計金額</a>
+        </nav>
+    </header>
+
+    <!-- ページごとの内容をここに挿入 -->
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- 共通フッター -->
+    <footer>
+        <p>&copy; 2024 在庫管理システム</p>
+    </footer>
+</body>
+</html>

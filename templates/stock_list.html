@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>食品在庫一覧＆管理</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>食品在庫管理</h1>
-    
+{% extends "base.html" %}
+
+{% block title %}在庫一覧{% endblock %}
+
+{% block content %}
     <h2>在庫情報</h2>
     <table>
         <thead>
@@ -18,33 +13,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in inventory %}
+            {% for item in stocks %}
             <tr>
                 <td>{{ item.name }}</td>
                 <td>{{ item.price }} 円</td>
-                <td id="quantity-{{ item.id }}" class="{% if item.quantity == 0 %}out-of-stock{% endif %}">
-                    {{ item.quantity }}
-                </td>
+                <td>{{ item.quantity }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <h2>在庫一覧</h2>
-    <table>
-        <tr>
-            <th>商品名</th>
-            <th>在庫数</th>
-            <th>最終更新日</th>
-        </tr>
-        {% for stock in stocks %}
-        <tr>
-            <td>{{ stock.name }}</td>
-            <td class="{% if stock.quantity == 0 %}out-of-stock{% endif %}">{{ stock.quantity }}</td>
-            <td>{{ stock.last_updated }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
-</body>
-</html>
+{% endblock %}
