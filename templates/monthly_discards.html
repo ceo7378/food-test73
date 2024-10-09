@@ -2,25 +2,26 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>合計金額グラフ</title>
+    <title>月間廃棄数量グラフ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>合計金額グラフ</h1>
+    <h1>月間廃棄数量グラフ</h1>
     <canvas id="myChart"></canvas>
     <script>
         // データが正しく渡されているか確認するためのコンソールログ
-        console.log('Items:', {{ items|tojson }});
+        console.log('Months:', {{ months|tojson }});
+        console.log('Quantities:', {{ quantities|tojson }});
         
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar', // グラフの種類
             data: {
-                labels: {{ items|map(attribute='name')|list|tojson }},
+                labels: {{ months|tojson|default([]) }}, // 月ごとのラベル
                 datasets: [{
-                    label: '価格',
-                    data: {{ items|map(attribute='price')|list|tojson }},
+                    label: '廃棄数量',
+                    data: {{ quantities|tojson|default([]) }}, // 廃棄数量データ
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
