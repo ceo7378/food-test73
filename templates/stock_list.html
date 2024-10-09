@@ -1,25 +1,32 @@
-{% extends "base.html" %}
-
-{% block title %}在庫一覧{% endblock %}
-
-{% block content %}
-    <h2>在庫情報</h2>
-    <table>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在庫一覧</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>在庫一覧</h1>
+    <table border="1">
         <thead>
             <tr>
                 <th>商品名</th>
+                <th>数量</th>
                 <th>価格</th>
-                <th>在庫数</th>
+                <th>最終更新日</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in stocks %}
+            {% for stock in stocks %}
             <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price }} 円</td>
-                <td>{{ item.quantity }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.quantity }}</td>
+                <td>{{ stock.price }}</td>
+                <td>{{ stock.last_updated }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-{% endblock %}
+</body>
+</html>

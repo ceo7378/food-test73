@@ -3,7 +3,7 @@ import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # セキュリティのために必要
+app.secret_key = 'your_secret_key'
 
 # データベース接続関数
 def get_db_connection():
@@ -31,7 +31,12 @@ def item_list():
 @app.route('/stocks')
 def stock_list():
     conn = get_db_connection()
-    stocks = conn.execute('SELECT items.name, stocks.quantity, stocks.last_updated FROM stocks JOIN items ON stocks.item_id = items.id').fetchall()
+    # items.price を追加して価格も取得
+    stocks = conn.execute('''
+        SELECT items.name, items.price, stocks.quantity, stocks.last_updated
+        FROM stocks
+        JOIN items ON stocks.item_id = items.id
+    ''').fetchall()
     conn.close()
     return render_template('stock_list.html', stocks=stocks)
 
@@ -39,7 +44,11 @@ def stock_list():
 @app.route('/discards')
 def discard_list():
     conn = get_db_connection()
-    discards = conn.execute('SELECT items.name, discards.discard_date, discards.reason, discards.discarded_quantity FROM discards JOIN items ON discards.item_id = items.id').fetchall()
+    discards = conn.execute('''
+        SELECT items.name, discards.discard_date, discards.reason, discards.discarded_quantity
+        FROM discards
+        JOIN items ON discards.item_id = items.id
+    ''').fetchall()
     conn.close()
     return render_template('discard_list.html', discards=discards)
 
@@ -59,10 +68,9 @@ def register_disposal():
         conn.execute('DELETE FROM stocks WHERE item_id = ? AND quantity = 0', (item_id,))
         conn.commit()
         conn.close()
-        flash('廃棄品が登録されました。')  # 成功メッセージ
+        flash('廃棄品が登録されました。')
         return redirect(url_for('discard_list'))
 
-    # 商品リストを取得してフォームに表示
     conn = get_db_connection()
     items = conn.execute('SELECT * FROM items').fetchall()
     conn.close()
@@ -94,7 +102,6 @@ def total_graph():
     items = conn.execute('SELECT name, price FROM items').fetchall()
     conn.close()
     
-    # itemsをリスト形式に変換
     items_list = [{'name': item['name'], 'price': item['price']} for item in items]
     
     return render_template('total_graph.html', items=items_list)
@@ -105,20 +112,19 @@ def monthly_discards():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # 月ごとの廃棄数量を取得
-    cursor.execute('''SELECT strftime('%Y-%m', discard_date) as month, SUM(discarded_quantity) as total_quantity
-                      FROM discards
-                      GROUP BY month
-                      ORDER BY month
-                   ''')
+    cursor.execute('''
+        SELECT strftime('%Y-%m', discard_date) as month, SUM(discarded_quantity) as total_quantity
+        FROM discards
+        GROUP BY month
+        ORDER BY month
+    ''')
     monthly_data = cursor.fetchall()
     conn.close()
 
-    # データをテンプレートに渡すためにリストに変換
     months = [row['month'] for row in monthly_data]
     quantities = [row['total_quantity'] for row in monthly_data]
 
     return render_template('monthly_discards.html', months=months, quantities=quantities)
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)

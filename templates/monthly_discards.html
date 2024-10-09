@@ -2,24 +2,22 @@
 {% block title %}月間廃棄数量グラフ{% endblock %}
 {% block content %}
     <h2>月間廃棄数量グラフ</h2>
-    <!-- 戻るボタン
-    <a href="/items" class="back-button">戻る</a>  購入品一覧に戻る -->
-    <!-- グラフを表示するエリア -->
     <canvas id="discard-chart" style="width: 100%; height: 400px;"></canvas>
-    <!-- グラフ描画用のスクリプト -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('discard-chart').getContext('2d');
         const discardChart = new Chart(ctx, {
-            type: 'bar',  // グラフの種類を指定
+            type: 'line',  // グラフの種類を折れ線グラフに変更
             data: {
                 labels: {{ months|tojson }},  // 月のラベルをPython側から渡す
                 datasets: [{
                     label: '廃棄数量',
                     data: {{ quantities|tojson }},  // 廃棄数量データをPython側から渡す
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false, // グラフを塗りつぶさない
+                    tension: 0.1 // 線を滑らかにするオプション
                 }]
             },
             options: {

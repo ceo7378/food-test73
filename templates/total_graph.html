@@ -15,15 +15,17 @@
         
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'bar', // グラフの種類
+            type: 'line', // グラフの種類を折れ線グラフに変更
             data: {
                 labels: {{ items|map(attribute='name')|list|tojson }},
                 datasets: [{
                     label: '価格',
                     data: {{ items|map(attribute='price')|list|tojson }},
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false, // グラフを塗りつぶさない
+                    tension: 0.1 // 線を滑らかにするオプション
                 }]
             },
             options: {
