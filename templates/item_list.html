@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>購入品一覧</title>
-</head>
-<body>
-    <h1>購入品一覧</h1>
+{% extends "base.html" %}
+{% block title %}購入品一覧{% endblock %}
+{% block content %}
+    <h2>購入品一覧</h2>
     <table>
         <tr>
             <th>商品名</th>
             <th>数量</th>
-            <th>購入日</th>
             <th>価格</th>
-            <th>賞味期限</th>
+            <th>購入日</th>
+            <th>有効期限</th>
         </tr>
         {% for item in items %}
         <tr>
             <td>{{ item.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>{{ item.purchase_date }}</td>
             <td>{{ item.price }}</td>
+            <td>{{ item.purchase_date }}</td>
             <td>{{ item.expiration_date }}</td>
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock %}

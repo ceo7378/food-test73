@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>廃棄品一覧</title>
-</head>
-<body>
-    <h1>廃棄品一覧</h1>
+{% extends "base.html" %}
+{% block title %}廃棄品一覧{% endblock %}
+{% block content %}
+    <h2>廃棄品一覧</h2>
     <table>
         <tr>
             <th>商品名</th>
@@ -22,5 +18,4 @@
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock %}

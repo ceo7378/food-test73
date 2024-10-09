@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>月間廃棄数量グラフ</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends "base.html" %}
+{% block title %}月間廃棄数量グラフ{% endblock %}
+{% block content %}
+    <h2>月間廃棄数量グラフ</h2>
+    <!-- 戻るボタン
+    <a href="/items" class="back-button">戻る</a>  購入品一覧に戻る -->
+    <!-- グラフを表示するエリア -->
+    <canvas id="discard-chart" style="width: 100%; height: 400px;"></canvas>
+    <!-- グラフ描画用のスクリプト -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <h1>月間廃棄数量グラフ</h1>
-    <canvas id="myChart"></canvas>
     <script>
-        // データが正しく渡されているか確認するためのコンソールログ
-        console.log('Months:', {{ months|tojson }});
-        console.log('Quantities:', {{ quantities|tojson }});
-        
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar', // グラフの種類
+        const ctx = document.getElementById('discard-chart').getContext('2d');
+        const discardChart = new Chart(ctx, {
+            type: 'bar',  // グラフの種類を指定
             data: {
-                labels: {{ months|tojson|default([]) }}, // 月ごとのラベル
+                labels: {{ months|tojson }},  // 月のラベルをPython側から渡す
                 datasets: [{
                     label: '廃棄数量',
-                    data: {{ quantities|tojson|default([]) }}, // 廃棄数量データ
+                    data: {{ quantities|tojson }},  // 廃棄数量データをPython側から渡す
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
@@ -30,11 +25,24 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true // Y軸の値がゼロから始まる
+                        beginAtZero: true
                     }
                 }
             }
         });
     </script>
-</body>
-</html>
+    <style>
+        .back-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 15px;
+            color: white;
+            background-color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #0056B3; /* ホバー時の色 */
+        }
+    </style>
+{% endblock %}
