@@ -10,11 +10,15 @@
     {% endif %}
 
     <form action="/register_disposal" method="POST">
-        <label for="name">商品名:</label>
-        <input type="text" id="name" name="name" required><br>
+        <label for="item_id">商品名:</label>
+        <select id="item_id" name="item_id" required>
+            {% for item in items %}
+                <option value="{{ item.id }}">{{ item.name }}</option>
+            {% endfor %}
+        </select><br>
 
-        <label for="quantity">数量:</label>
-        <input type="number" id="quantity" name="quantity" required><br>
+        <label for="discarded_quantity">数量:</label>
+        <input type="number" id="discarded_quantity" name="discarded_quantity" required><br>
 
         <label for="reason">廃棄理由:</label>
         <textarea id="reason" name="reason" required></textarea><br>
