@@ -2,12 +2,14 @@
 {% block title %}廃棄品一覧{% endblock %}
 {% block content %}
     <h2>廃棄品一覧</h2>
-    <table>
+    <table border="1">
         <tr>
             <th>商品名</th>
             <th>廃棄日</th>
             <th>理由</th>
             <th>廃棄数量</th>
+            <th>単価</th>
+            <th>小計</th>
         </tr>
         {% for discard in discards %}
         <tr>
@@ -15,7 +17,12 @@
             <td>{{ discard.discard_date }}</td>
             <td>{{ discard.reason }}</td>
             <td>{{ discard.discarded_quantity }}</td>
+            <td>{{ discard.price }}円</td>
+            <td>{{ discard.discarded_quantity * discard.price }}円</td>
         </tr>
         {% endfor %}
     </table>
+    
+    <!-- 合計金額を表示 -->
+    <h3>合計廃棄金額: {{ total_price }}円</h3>
 {% endblock %}

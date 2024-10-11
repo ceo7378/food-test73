@@ -5,14 +5,19 @@
     <title>廃棄品管理ホーム</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
+<header>
     <h1>廃棄品管理システム</h1>
-    <nav>
-        <a href="/add_item">商品を追加</a> |
-        <a href="/items">購入品一覧</a> |
-        <a href="/stocks">在庫一覧</a> |
-        <a href="/discards">廃棄品一覧</a> |
-        <a href="/total_graph">合計廃棄量の金額</a>
+</header>
+    <nav class="nav-black">
+        <ul>
+            <li><a href="/add_item">商品を追加</a></li>
+            <li><a href="/items">購入品一覧</a></li>
+            <li><a href="/discards">廃棄品一覧</a></li>
+            <li><a href="/monthly_discards">月間廃棄数量グラフ</a></li>
+            <li><a href="/total_graph">合計廃棄量の金額</a></li>
+        </ul>
     </nav>
 </body>
 </html>

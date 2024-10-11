@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>月間の合計廃棄量グラフ</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends "base.html" %}
+
+{% block title %}月間の合計廃棄金額グラフ{% endblock %}
+
+{% block content %}
+    <h2>廃棄商品の月間金額グラフ</h2>
+    <canvas id="myChart" style="width: 100%; height: 400px;"></canvas>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <h1>廃棄商品の月間合計金額グラフ</h1>
-    <canvas id="myChart"></canvas>
+    
     <script>
         // データが正しく渡されているか確認するためのコンソールログ
         console.log('Items:', {{ items|tojson }});
@@ -17,10 +16,10 @@
         var myChart = new Chart(ctx, {
             type: 'line', // グラフの種類を折れ線グラフに変更
             data: {
-                labels: {{ items|map(attribute='name')|list|tojson }},
+                labels: {{ items|map(attribute='name')|list|tojson }}, // 商品名をラベルとして使用
                 datasets: [{
                     label: '価格',
-                    data: {{ items|map(attribute='price')|list|tojson }},
+                    data: {{ items|map(attribute='price')|list|tojson }}, // 価格データ
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1,
@@ -39,5 +38,4 @@
             }
         });
     </script>
-</body>
-</html>
+{% endblock %}
