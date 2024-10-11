@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}廃棄品編集{% endblock %}
+{% block content %}
+    <h2>廃棄品編集</h2>
+    <form action="" method="POST">
+        <label for="discard_date">廃棄日:</label>
+        <input type="date" id="discard_date" name="discard_date" value="{{ discard.discard_date }}" required><br>
+
+        <label for="reason">廃棄理由:</label>
+        <input type="text" id="reason" name="reason" value="{{ discard.reason }}"><br>
+
+        <label for="discarded_quantity">廃棄数量:</label>
+        <input type="number" id="discarded_quantity" name="discarded_quantity" value="{{ discard.discarded_quantity }}" required><br>
+
+        <button type="submit">保存</button>
+    </form>
+{% endblock %}

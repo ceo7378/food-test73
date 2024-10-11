@@ -2,35 +2,59 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}廃棄品管理システム{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <!-- 共通ヘッダー -->
     <header>
-        <h1>廃棄品管理システム</h1>
-        <nav>
-            <ul>
-                <li><a href="/">ホーム</a></li>
-                <li><a href="/add_item">商品を追加</a></li>
-                <li><a href="/items">購入品一覧</a> </li>
-                <li><a href="/discards">廃棄品一覧</a></li>
-                <li><a href="/register_disposal">廃棄品登録</a></li>
-                <li><a href="/monthly_discards">月間廃棄数量グラフ</a></li>
-                <li><a href="/total_graph">合計廃棄量の金額</a></li>
-            </ul> 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">廃棄品管理システム</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_item">商品を追加</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/items">購入品一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/discards">廃棄品一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register_disposal">廃棄品登録</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/monthly_discards">月間廃棄数量グラフ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/total_graph">合計廃棄量の金額</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     <!-- ページごとの内容をここに挿入 -->
-    <div>
+    <div class="container mt-5">
         {% block content %}{% endblock %}
     </div>
     <!-- 共通フッター -->
-    <footer>
+    <footer class="bg-light text-center py-3">
         <p>&copy; 2024 廃棄品管理システム</p>
     </footer>
+    <!-- BootstrapのJavaScriptも追加 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
+</html>
 
 
 

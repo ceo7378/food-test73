@@ -10,6 +10,8 @@
             <th>廃棄数量</th>
             <th>単価</th>
             <th>小計</th>
+            <th>item_id</th>  <!-- item_id を表示するための列を追加 -->
+            <th>操作</th>
         </tr>
         {% for discard in discards %}
         <tr>
@@ -19,6 +21,8 @@
             <td>{{ discard.discarded_quantity }}</td>
             <td>{{ discard.price }}円</td>
             <td>{{ discard.discarded_quantity * discard.price }}円</td>
+            <td>{{ discard.item_id }}</td>  <!-- item_id を表示 -->
+            <td><a href="/edit_discard/{{ discard.item_id }}">編集</a></td>
         </tr>
         {% endfor %}
     </table>

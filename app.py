@@ -119,5 +119,57 @@ def monthly_discards():
     
     return render_template('monthly_discards.html', months=months, quantities=quantities)
 
+# 購入品編集用のルート
+@app.route('/edit_item/<int:id>', methods=['GET', 'POST'])
+def edit_item(id):
+    conn = get_db_connection()
+    item = conn.execute('SELECT * FROM items WHERE id = ?', (id,)).fetchone()
+
+    if request.method == 'POST':
+        # 購入品の更新処理
+        name = request.form['name']
+        quantity = int(request.form['quantity'])
+        price = float(request.form['price'])
+        purchase_date = request.form['purchase_date']
+        expiration_date = request.form['expiration_date']
+
+        conn.execute('UPDATE items SET name = ?, quantity = ?, price = ?, purchase_date = ?, expiration_date = ? WHERE id = ?',
+                     (name, quantity, price, purchase_date, expiration_date, id))
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('item_list'))
+
+    return render_template('edit_item.html', item=item)
+
+# 廃棄品編集用のルート
+@app.route('/edit_discard/<int:item_id>', methods=['GET', 'POST'])
+def edit_discard(item_id):
+    conn = get_db_connection()
+    discard = conn.execute('SELECT * FROM discards WHERE item_id = ?', (item_id,)).fetchone()
+
+    if discard is None:
+        # データが見つからない場合の処理
+        return "指定された廃棄品が見つかりませんでした", 404
+
+    if request.method == 'POST':
+        # 廃棄品の更新処理
+        discard_date = request.form['discard_date']
+        reason = request.form['reason']
+        discarded_quantity = int(request.form['discarded_quantity'])
+
+        conn.execute('UPDATE discards SET discard_date = ?, reason = ?, discarded_quantity = ? WHERE item_id = ?',
+                     (discard_date, reason, discarded_quantity, item_id))
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('discard_list'))
+
+    return render_template('edit_discard.html', discard=discard)
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

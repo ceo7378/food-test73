@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}購入品編集{% endblock %}
+{% block content %}
+    <h2>購入品編集</h2>
+    <form action="" method="POST">
+        <label for="name">商品名:</label>
+        <input type="text" id="name" name="name" value="{{ item.name }}" required><br>
+
+        <label for="quantity">数量:</label>
+        <input type="number" id="quantity" name="quantity" value="{{ item.quantity }}" required><br>
+
+        <label for="price">価格:</label>
+        <input type="number" id="price" name="price" value="{{ item.price }}" required><br>
+
+        <label for="purchase_date">購入日:</label>
+        <input type="date" id="purchase_date" name="purchase_date" value="{{ item.purchase_date }}" required><br>
+
+        <label for="expiration_date">有効期限:</label>
+        <input type="date" id="expiration_date" name="expiration_date" value="{{ item.expiration_date }}"><br>
+
+        <button type="submit">保存</button>
+    </form>
+{% endblock %}

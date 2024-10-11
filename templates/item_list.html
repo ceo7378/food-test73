@@ -9,6 +9,7 @@
             <th>価格</th>
             <th>購入日</th>
             <th>有効期限</th>
+            <th>操作</th>
         </tr>
         {% for item in items %}
         <tr>
@@ -17,6 +18,7 @@
             <td>{{ item.price }}</td>
             <td>{{ item.purchase_date }}</td>
             <td>{{ item.expiration_date }}</td>
+            <td><a href="/edit_item/{{ item.id }}">編集</a></td>
         </tr>
         {% endfor %}
     </table>

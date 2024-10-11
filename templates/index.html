@@ -2,22 +2,59 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>廃棄品管理ホーム</title>
+    <!-- Bootstrapのリンク -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 自作のスタイルシート -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
-<header>
-    <h1>廃棄品管理システム</h1>
-</header>
-    <nav class="nav-black">
-        <ul>
-            <li><a href="/add_item">商品を追加</a></li>
-            <li><a href="/items">購入品一覧</a></li>
-            <li><a href="/discards">廃棄品一覧</a></li>
-            <li><a href="/monthly_discards">月間廃棄数量グラフ</a></li>
-            <li><a href="/total_graph">合計廃棄量の金額</a></li>
-        </ul>
+    <!-- 共通ヘッダー -->
+    <header class="bg-success text-white text-center py-4 mb-5">
+        <h1>エコな廃棄品管理システム</h1>
+        <p>環境を守りながら、持続可能な未来へ</p>
+    </header>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_item">商品を追加</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/items">購入品一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/discards">廃棄品一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/monthly_discards">月間廃棄数量グラフ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/total_graph">合計廃棄量の金額</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
+    <!-- エコなテーマの画像を中央に配置 -->
+    <div class="container text-center">
+        <img src="static\images\eco_image.jpg" alt="Eco-friendly theme" class="img-fluid my-4">
+    </div>
+    <!-- BootstrapのJavaScriptも追加 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
